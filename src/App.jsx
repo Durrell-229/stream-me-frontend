@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Check, X, LogOut, Edit2, ArrowRight, Sparkles, Upload, CreditCard, Eye, Loader2, HardDrive, Trash, Plus, Download, Shield, Tv, Globe } from 'lucide-react';
 
-const API_BASE_URL = 'https://stream-me-api.onrender.com';
+const API_BASE_URL = 'https://stream-me-backend.onrender.com';
 const KKIAPAY_PUBLIC_KEY = 'YOUR_KKIAPAY_PUBLIC_KEY';
 const KKIAPAY_SANDBOX = true;
 const TOKEN_KEY = 'streamme_token';
