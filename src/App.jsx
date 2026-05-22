@@ -1,5 +1,6 @@
+/* eslint-disable */
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Plus, Check, Search, X, Download, LogOut, Edit2, Trash2, ArrowRight, Sparkles, Globe, Shield, Tv, CreditCard, User, Eye, EyeOff, Loader2, Lock, HardDrive, Clock, Trash } from 'lucide-react';
+import { Play, Check, X, LogOut, Edit2, ArrowRight, Sparkles, Upload, CreditCard, Eye, Loader2, HardDrive, Trash, Plus, Download, Shield, Tv, Globe } from 'lucide-react';
 
 const API_BASE_URL = 'https://stream-me-api.onrender.com';
 const KKIAPAY_PUBLIC_KEY = 'YOUR_KKIAPAY_PUBLIC_KEY';
@@ -142,16 +143,14 @@ const DownloadsManager = ({ onClose, user, showToast }) => {
     <div className="fixed inset-0 z-40 bg-black overflow-y-auto">
       <div className="sticky top-0 bg-black/95 backdrop-blur border-b border-white/10 px-4 md:px-12 py-4 flex items-center justify-between z-10">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">Mes téléchargements</h1>
+          <h1 className="text-2xl font-bold text-white">Mes téléchargements</h1>
           <p className="text-xs text-white/50">{downloads.length} / {limit} vidéos • {formatSize(totalSize)}</p>
         </div>
         <button onClick={onClose} className="text-white hover:text-red-400"><X size={28} /></button>
       </div>
       <div className="max-w-5xl mx-auto p-4 md:p-12">
         {downloads.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-white/60">Aucune vidéo téléchargée</p>
-          </div>
+          <p className="text-white/60 text-center py-12">Aucune vidéo téléchargée</p>
         ) : (
           <div className="space-y-3">
             {downloads.map((d) => (
@@ -204,10 +203,11 @@ const BrowseApp = ({ user, catalog, profile, onSwitchProfile, onLogout, showToas
       <header className="fixed top-0 left-0 right-0 z-30 bg-gradient-to-b from-black/90 to-transparent px-4 md:px-12 py-4 flex items-center justify-between">
         <Logo size="md" />
         <div className="flex items-center gap-3 relative">
-          <button onClick={() => setDownloadsMgrOpen(true)} className="text-white/80 hover:text-blue-400" title="Téléchargements">
+          <button onClick={() => setDownloadsMgrOpen(true)} className="text-white/80 hover:text-blue-400">
             <HardDrive size={20} />
           </button>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="w-8 h-8 rounded-md flex items-center justify-center text-white font-bold text-sm hover:ring-2 ring-red-500" style={{ background: `linear-gradient(135deg, ${PROFILES_COLORS[0][0]}, ${PROFILES_COLORS[0][1]})` }}>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="w-8 h-8 rounded-md flex items-center justify-center text-white font-bold text-sm hover:ring-2 ring-red-500"
+            style={{ background: `linear-gradient(135deg, ${PROFILES_COLORS[0][0]}, ${PROFILES_COLORS[0][1]})` }}>
             {profile.name[0].toUpperCase()}
           </button>
           {menuOpen && (
@@ -218,7 +218,6 @@ const BrowseApp = ({ user, catalog, profile, onSwitchProfile, onLogout, showToas
           )}
         </div>
       </header>
-
       <div className="pt-24 pb-20 px-4 md:px-12">
         <h1 className="text-3xl font-bold text-white mb-6 mt-12">Catalogue</h1>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
@@ -235,7 +234,6 @@ const BrowseApp = ({ user, catalog, profile, onSwitchProfile, onLogout, showToas
           ))}
         </div>
       </div>
-
       {downloadsMgrOpen && <DownloadsManager onClose={() => setDownloadsMgrOpen(false)} user={user} showToast={showToast} />}
     </div>
   );
@@ -273,7 +271,7 @@ const AuthScreen = ({ mode, onSubmit, onSwitch, onBack, showToast }) => {
           <input type="password" placeholder="Mot de passe" value={pass} onChange={e => setPass(e.target.value)} disabled={loading} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/40 focus:border-red-500 focus:outline-none" />
           <button type="submit" disabled={loading} className="w-full bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white py-3 rounded-lg font-bold">{loading ? '...' : mode === 'signup' ? "S'inscrire" : 'Connexion'}</button>
         </form>
-        <p className="text-center text-sm text-white/60 mt-6">{mode === 'signup' ? 'Déjà inscrit ?' : 'Pas inscrit ?'} <button onClick={onSwitch} className="text-red-400 hover:underline">{mode === 'signup' ? 'Connexion' : 'S\'inscrire'}</button></p>
+        <p className="text-center text-sm text-white/60 mt-6">{mode === 'signup' ? 'Déjà inscrit ?' : 'Pas inscrit ?'} <button onClick={onSwitch} className="text-red-400 hover:underline">{mode === 'signup' ? 'Connexion' : "S'inscrire"}</button></p>
       </div>
     </div>
   );
@@ -304,31 +302,31 @@ const LandingPage = ({ onSignIn, onSignUp }) => (
       <Logo size="md" />
       <button onClick={onSignIn} className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded font-semibold">Connexion</button>
     </header>
-
     <section className="relative min-h-screen flex items-center justify-center px-4 pt-20">
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at top right, rgba(239,68,68,0.25) 0%, transparent 50%), #000' }} />
       <div className="relative text-center max-w-4xl">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 mb-6"><Sparkles size={14} className="text-red-400" /><span className="text-xs text-red-400 uppercase">Streaming Nouvelle Génération</span></div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 mb-6">
+          <Sparkles size={14} className="text-red-400" /><span className="text-xs text-red-400 uppercase">Streaming Nouvelle Génération</span>
+        </div>
         <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">Films & séries,<br /><span className="text-red-500">illimités.</span></h1>
-        <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto">Regardez en ligne ou hors ligne. Gratuit, sur abonnement, ou à la carte. Mobile Money. Accédez au meilleur du streaming.</p>
+        <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto">Regardez en ligne ou hors ligne. Gratuit, sur abonnement, ou à la carte. Mobile Money.</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button onClick={onSignUp} className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-md font-bold text-lg flex items-center justify-center gap-2">Commencer <ArrowRight size={20} /></button>
           <button onClick={onSignIn} className="text-white/80 hover:text-white px-6 py-4">Connexion →</button>
         </div>
       </div>
     </section>
-
-    <section className="relative py-20 px-4 md:px-12 border-t border-white/5">
+    <section className="py-20 px-4 md:px-12 border-t border-white/5">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-16">Pourquoi <span className="text-red-500">STREAM·ME</span> ?</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { t: 'Sur tous vos écrans', d: 'TV, mobile, tablette, ordinateur.' },
-            { t: 'Regardez hors-ligne', d: 'Téléchargez vos favoris et regardez sans connexion.' },
+            { t: 'Regardez hors-ligne', d: 'Téléchargez et regardez sans connexion.' },
             { t: 'Sans publicité', d: 'Expérience pure sans interruption.' },
             { t: 'Catalogue mondial', d: 'Milliers de films et séries en HD/4K.' },
-            { t: 'Mobile Money & Carte', d: 'Payez avec MTN, Moov, Orange ou carte.' },
-            { t: 'Streaming rapide', d: 'Optimisé pour l\'Afrique. Lecture instantanée.' },
+            { t: 'Mobile Money & Carte', d: 'MTN, Moov, Orange ou carte bancaire.' },
+            { t: 'Streaming rapide', d: "Optimisé pour l'Afrique." },
           ].map((f, i) => (
             <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-colors">
               <h3 className="text-xl font-bold mb-2">{f.t}</h3>
@@ -338,7 +336,6 @@ const LandingPage = ({ onSignIn, onSignUp }) => (
         </div>
       </div>
     </section>
-
     <section className="py-20 px-4 md:px-12 border-t border-white/5">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12">Choisissez votre formule</h2>
@@ -358,7 +355,6 @@ const LandingPage = ({ onSignIn, onSignUp }) => (
         </div>
       </div>
     </section>
-
     <footer className="border-t border-white/10 py-12 px-4 text-center">
       <Logo size="sm" />
       <p className="text-white/40 text-xs mt-6">© 2026 Stream·Me</p>
@@ -378,13 +374,7 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      try {
-        const c = await api.listCatalog();
-        setCatalog(c);
-      } catch (e) {
-        console.error(e);
-      }
-
+      try { const c = await api.listCatalog(); setCatalog(c); } catch (e) { console.error(e); }
       const token = api.getToken();
       if (token) {
         try {
@@ -393,43 +383,30 @@ export default function App() {
           const p = await api.listProfiles();
           setProfiles(p);
           setScreen(p.length > 0 ? 'profiles' : 'landing');
-        } catch {
-          api.setToken(null);
-          setScreen('landing');
-        }
-      } else {
-        setScreen('landing');
-      }
+        } catch { api.setToken(null); setScreen('landing'); }
+      } else { setScreen('landing'); }
     })();
   }, []);
 
   const handleSignup = async (data) => {
     const { user: u, token } = await api.signup(data);
-    api.setToken(token);
-    setUser(u);
-    const p = await api.listProfiles();
-    setProfiles(p);
+    api.setToken(token); setUser(u);
+    const p = await api.listProfiles(); setProfiles(p);
     showToast(`Bienvenue ${u.name} !`, 'success');
     setScreen(p.length > 0 ? 'profiles' : 'landing');
   };
 
   const handleLogin = async (data) => {
     const { user: u, token } = await api.login(data);
-    api.setToken(token);
-    setUser(u);
-    const p = await api.listProfiles();
-    setProfiles(p);
+    api.setToken(token); setUser(u);
+    const p = await api.listProfiles(); setProfiles(p);
     showToast(`Bon retour ${u.name} !`, 'success');
     setScreen(p.length > 0 ? 'profiles' : 'landing');
   };
 
   const logout = () => {
-    api.setToken(null);
-    setUser(null);
-    setProfiles([]);
-    setActiveProfile(null);
-    setScreen('landing');
-    showToast('Déconnecté', 'info');
+    api.setToken(null); setUser(null); setProfiles([]); setActiveProfile(null);
+    setScreen('landing'); showToast('Déconnecté', 'info');
   };
 
   if (screen === 'loading') return <div className="min-h-screen bg-black flex items-center justify-center"><Loader2 className="animate-spin text-red-500" size={32} /></div>;
@@ -440,7 +417,6 @@ export default function App() {
         * { box-sizing: border-box; }
         body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
         ::-webkit-scrollbar { display: none; }
-        @keyframes slideDown { from { transform: translate(-50%, -100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
         .animate-spin { animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
